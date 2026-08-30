@@ -1,0 +1,28 @@
+:host {
+  display: inline-block;
+  font-family: var(--rk-font);
+}
+
+.stars {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.star {
+  color: #d6d3d1;
+  cursor: pointer;
+  transition: color 0.1s ease, transform 0.1s ease;
+  user-select: none;
+
+  &.filled {
+    color: #f59e0b;
+  }
+}
+
+.readonly .star {
+  cursor: default;
+}
+
+.stars:not(.readonly) .star:hover {
+  transform: scale(1.15);
+}

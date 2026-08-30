@@ -1,0 +1,46 @@
+{
+  "name": "@rohitkumar/recipe-ui-kit",
+  "version": "0.1.0",
+  "description": "Reusable Stencil web-component library for the Recipe Finder & Meal Planner app (recipe cards, star rating, search bar, day slots, tags, modal).",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/recipe-ui-kit/recipe-ui-kit.esm.js",
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "stencil build --docs",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "generate": "stencil generate"
+  },
+  "dependencies": {
+    "@stencil/core": "^4.20.0"
+  },
+  "devDependencies": {
+    "@stencil/sass": "^3.0.11",
+    "puppeteer": "^22.0.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rohitkumar/recipe-ui-kit"
+  },
+  "keywords": [
+    "stencil",
+    "web-components",
+    "svelte",
+    "recipe",
+    "ui-kit"
+  ]
+}

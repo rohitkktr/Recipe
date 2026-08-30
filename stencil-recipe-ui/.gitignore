@@ -1,0 +1,8 @@
+node_modules/
+dist/
+www/
+loader/
+.stencil/
+*.log
+src/components.d.ts
+*.tgz

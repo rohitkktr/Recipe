@@ -1,0 +1,56 @@
+name: Build & Open PR
+
+on:
+  push:
+    branches-ignore: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: build-pr-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build component library
+        working-directory: stencil-recipe-ui
+        run: |
+          npm install
+          npm run build
+
+      - name: Install app dependencies
+        working-directory: sveltekit-recipe-app
+        run: npm install
+
+      - name: Build (validation gate — PR only opens if this succeeds)
+        working-directory: sveltekit-recipe-app
+        env:
+          BASE_PATH: ${{ endsWith(github.event.repository.name, '.github.io') && '' || format('/{0}', github.event.repository.name) }}
+        run: npm run build
+
+      - name: Open PR into main (skip if one is already open)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          existing=$(gh pr list --head "$BRANCH" --base main --state open --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            echo "PR #$existing already open for $BRANCH -> main, nothing to do."
+            exit 0
+          fi
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "Build passed on $BRANCH — ready for review" \
+            --body "Automated PR: the build succeeded on \`$BRANCH\`. Review and merge to deploy to GitHub Pages via deploy.yml."

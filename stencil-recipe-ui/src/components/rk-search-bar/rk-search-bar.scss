@@ -1,0 +1,43 @@
+:host {
+  display: block;
+  font-family: var(--rk-font);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--rk-color-bg);
+  border: 1px solid #e7e5e4;
+  border-radius: 999px;
+  padding: 0.4rem 0.5rem 0.4rem 1rem;
+}
+
+.icon {
+  opacity: 0.6;
+}
+
+input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: transparent;
+  color: var(--rk-color-text);
+}
+
+button {
+  border: none;
+  background: var(--rk-color-primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.85rem;
+
+  &:hover {
+    background: var(--rk-color-primary-dark);
+  }
+}
